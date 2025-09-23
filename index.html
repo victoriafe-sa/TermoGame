@@ -172,6 +172,7 @@
     <div id="end-game-modal" class="modal-backdrop hidden">
         <div class="modal-content text-center">
             <h2 id="end-game-title" class="text-2xl font-bold mb-2"></h2>
+            <p id="end-game-message" class="text-lg mb-3"></p>
             <p class="mb-4">A palavra era: <strong id="secret-word-display" class="text-xl"></strong></p>
             <button id="play-again-btn" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Jogar Novamente</button>
         </div>
@@ -411,15 +412,21 @@
         function endGame(isWin) {
             isGameOver = true;
             document.getElementById('secret-word-display').textContent = secretWord;
+            const endGameTitle = document.getElementById('end-game-title');
+            const endGameMessage = document.getElementById('end-game-message');
+
             if (isWin) {
-                document.getElementById('end-game-title').textContent = "Parabéns, você venceu!";
+                const pointsWon = MAX_TRIES - currentRow;
+                endGameTitle.textContent = "Parabéns, você venceu!";
+                endGameMessage.textContent = `Você ganhou ${pointsWon} pontos!`;
                 if (currentUser) {
-                    currentUser.score++;
+                    currentUser.score += pointsWon;
                     updateUser(currentUser);
                     updateScoreDisplay();
                 }
             } else {
-                 document.getElementById('end-game-title').textContent = "Fim de jogo!";
+                 endGameTitle.textContent = "Fim de jogo!";
+                 endGameMessage.textContent = "Mais sorte da próxima vez.";
             }
             setTimeout(() => endGameModal.classList.remove('hidden'), 500);
         }
