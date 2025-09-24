@@ -39,7 +39,7 @@ javac -d . src/*.java
 Após a compilação, execute o jogo com o seguinte comando:
 
 ```bash
-java Main
+java -cp src Main
 ```
 
 *Este comando iniciará a aplicação, e a janela do jogo deverá aparecer.*
